@@ -4,8 +4,10 @@ jobs:
     working_directory: ~/repo
     docker:
       - image: cimg/go:1.15.10
+    parallelism: 2
     environment: # environment variables for the build itself
       TEST_RESULTS: /tmp/test-results # path to where test results will be saved
+    
     steps:
       - checkout
       - run: mkdir -p $TEST_RESULTS # create the test results directory
