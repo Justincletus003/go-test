@@ -25,5 +25,9 @@ jobs:
           name: Run tests
           command: |
             go test -v
+      - store_artifacts: # upload test summary for display in Artifacts
+          path: /tmp/test-results
+          destination: raw-test-output
       - store_test_results: # upload test results for display in Test Summary
           path: /tmp/test-results
+      - run: ls -al /tmp/test-results
