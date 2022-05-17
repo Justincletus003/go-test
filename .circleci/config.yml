@@ -4,8 +4,11 @@ jobs:
     working_directory: ~/repo
     docker:
       - image: cimg/go:1.15.10
+    environment: # environment variables for the build itself
+      TEST_RESULTS: /tmp/test-results # path to where test results will be saved
     steps:
       - checkout
+      - run: mkdir -p $TEST_RESULTS # create the test results directory
       - restore_cache:
           keys:
             - go-mod-v4-{{ checksum "go.sum" }}
@@ -18,4 +21,7 @@ jobs:
             - "/go/pkg/mod"
       - run:
           name: Run tests
-          command: go test -v
+          command: |
+            go test -v
+      - store_test_results: # upload test results for display in Test Summary
+          path: /tmp/test-results
