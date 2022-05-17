@@ -30,4 +30,4 @@ jobs:
           destination: raw-test-output
       - store_test_results: # upload test results for display in Test Summary
           path: /tmp/test-results
-      - run: ls -al /tmp/test-results
+      - run: ls -al /tmp/test-results/circleci
